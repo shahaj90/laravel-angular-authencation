@@ -5,33 +5,32 @@ export class TokenService {
 
 	constructor() { }
 
-	private iss ={
+	private iss = {
 		login: "http://localhost:8000/api/login",
 		signup: "http://localhost:8000/api/signup",
 	}
 
-	handle(token){
+	handle(token) {
 		this.set(token);
-		console.log(this.isValid());
 	}
 
-	set(token){
-		localStorage.setItem('token',token);
+	set(token) {
+		localStorage.setItem('token', token);
 	}
 
-	get(){
+	get() {
 		return localStorage.getItem('token');
 	}
 
-	remove(){
+	remove() {
 		localStorage.removeItem('token');
 	}
 
-	isValid(){
+	isValid() {
 		const token = this.get();
 		if (token) {
-			const payLoad =this.payLoad(token);
-			if(payLoad){
+			const payLoad = this.payLoad(token);
+			if (payLoad) {
 				return Object.values(this.iss).indexOf(payLoad.iss) > -1 ? true : false;
 			}
 		}
@@ -39,16 +38,16 @@ export class TokenService {
 		return false;
 	}
 
-	payLoad(token){
+	payLoad(token) {
 		const payLoad = token.split('.')[1];
 		return this.decode(payLoad);
 	}
 
-	decode(payLoad){
+	decode(payLoad) {
 		return JSON.parse(atob(payLoad));
 	}
 
-	loggedIn(){
+	loggedIn() {
 		return this.isValid();
 	}
 

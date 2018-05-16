@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +15,9 @@ import { AppRotingModule } from './/app-roting.module';
 import { HttpClientModule } from '@angular/common/http';
 import { JarwisService } from './services/jarwis.service';
 import { TokenService } from './services/token.service';
+import { AuthService } from './services/auth.service';
+import { AfterLoginService } from './services/after-login.service';
+import { BeforeLoginService } from './services/before-login.service';
 
 
 @NgModule({
@@ -27,12 +31,13 @@ import { TokenService } from './services/token.service';
     ResponseResetComponent
   ],
   imports: [
+    CommonModule,    
     BrowserModule,
     AppRotingModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [JarwisService, TokenService],
+  providers: [JarwisService, TokenService, AuthService, AfterLoginService, BeforeLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
